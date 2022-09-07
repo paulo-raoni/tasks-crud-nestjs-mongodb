@@ -1,0 +1,14 @@
+#docker-compose file
+version: '3'
+
+services:
+  taskscrudapp:
+    container_name: taskscrudapp
+    image: taskscrudapp/nest-mongodb:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
