@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { ClassSerializerInterceptor, Injectable, UseInterceptors } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from './user.model';
+import { User } from '../model/user.model';
 
 @Injectable()
 export class UsersService {
@@ -12,6 +12,7 @@ export class UsersService {
    * @param name
    * @param password
    */
+  @UseInterceptors(ClassSerializerInterceptor)
   async create(name: string, password: string): Promise<User> {
     const createdUser = new this.userModel({ name, password });
     return createdUser.save();
@@ -23,5 +24,4 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
-
 }
