@@ -57,7 +57,17 @@ A simple crud with tasks status, using nestjs, mongodb and docker.
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-  
+
+## Postman
+
+```
+Import this collection example into your Postman 
+(or any other API platform) to test the navigation through this API.
+```
+[tasks_crud_nest_mongodb.postman_collection.json](https://github.com/paulo-raoni/tasks-crud-nestjs-mongodb/blob/main/tasks_crud_nest_mongodb.postman_collection.json)
+
+
+
 
 ## Installation
 
@@ -94,15 +104,6 @@ $ npm run start:dev
 $ npm run start:prod
 
 ```
-
-
-## Postman
-
-```
-Import this collection example into your Postman 
-(or any other API platform) to test the navigation through this API.
-```
-[tasks_crud_nest_mongodb.postman_collection.json](https://github.com/paulo-raoni/tasks-crud-nestjs-mongodb/blob/main/tasks_crud_nest_mongodb.postman_collection.json)
   
 
 ## Test
