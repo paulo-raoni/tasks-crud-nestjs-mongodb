@@ -1,12 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { UsersService } from '../service/users.service';
 import { UsersController } from './users.controller';
 
 describe('UsersController', () => {
   let controller: UsersController;
 
+  /**
+   * This is broken. Need to be checked.
+   */
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
+      providers: [UsersService],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
@@ -16,7 +21,6 @@ describe('UsersController', () => {
     expect(controller).toBeDefined();
     expect(controller.getAllUsers).toBeDefined();
     expect(controller.getUserById).toBeDefined();
-    expect(controller.getUserByName).toBeDefined();
     expect(controller.deleteUserById).toBeDefined();
   });
 });

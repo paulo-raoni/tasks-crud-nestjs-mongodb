@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  HttpException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -9,10 +8,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { ValidStatus } from '../enum/validStatus';
 import { Task } from '../model/task.model';
+import { UsersService } from '../../users/service/users.service';
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectModel('Task') private readonly taskModel: Model<Task>) {}
+  constructor(
+    @InjectModel('Task') private readonly taskModel: Model<Task>,
+    private readonly usersService: UsersService,
+  ) {}
 
   /**
    * Create a new task
@@ -27,12 +30,23 @@ export class TasksService {
     status: string,
     userId: ObjectId,
   ): Promise<Task> {
+    try {
+      const userExists = await this.usersService.findById(userId.toString());
+      if (!userExists) {
+        throw new BadRequestException('This user does not exist');
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+
     const createTask = new this.taskModel({
       title,
       description,
       status,
       userId,
     });
+
     return createTask.save();
   }
 

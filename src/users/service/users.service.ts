@@ -58,7 +58,10 @@ export class UsersService {
       HttpStatus.NOT_FOUND,
     );
   }
-
+  
+  /**
+   * Delete user by id
+   */
   async deleteUserById(userId: string): Promise<void> {
     this.userModel.deleteMany({ _id: userId });
   }

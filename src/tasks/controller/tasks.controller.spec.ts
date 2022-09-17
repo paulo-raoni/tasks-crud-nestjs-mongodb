@@ -1,12 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { UsersModule } from '../../users/users.module';
+import { TasksService } from '../service/tasks.service';
 import { TasksController } from './tasks.controller';
 
 describe('TasksController', () => {
   let controller: TasksController;
 
+  /**
+   * This is broken. Need to be checked.
+   */
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [UsersModule],
       controllers: [TasksController],
+      providers: [TasksService],
     }).compile();
 
     controller = module.get<TasksController>(TasksController);
@@ -22,7 +29,4 @@ describe('TasksController', () => {
     expect(controller.deleteAllTasks).toBeDefined();
   });
 
-  // if('should be called', () => {
-  //   expect(controller.createOneTask).
-  // });
 });

@@ -39,10 +39,10 @@ export class TasksController {
     return { id: generatedId };
   }
 
-  @Get(':userId')
+  @Get(':taskId')
   @UseGuards(JwtAuthenticationGuard)
-  async getOneTask(@Param('userId') userId: string) {
-    const response = await this.tasksService.getOneTask(userId);
+  async getOneTask(@Param('taskId') taskId: string) {
+    const response = await this.tasksService.getOneTask(taskId);
     return {
       response,
     };
