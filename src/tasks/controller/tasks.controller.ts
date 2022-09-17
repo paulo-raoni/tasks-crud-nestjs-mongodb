@@ -6,9 +6,10 @@ import {
   Param,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ObjectId } from 'mongoose';
-import { User } from 'src/users/model/user.model';
+import JwtAuthenticationGuard from '../../authentication/jwt-authentication.guard';
 import { TasksService } from '../service/tasks.service';
 
 @Controller('tasks')
@@ -16,11 +17,13 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
+  @UseGuards(JwtAuthenticationGuard)
   async getAllTasks() {
     return await this.tasksService.findAll();
   }
 
   @Post()
+  @UseGuards(JwtAuthenticationGuard)
   async createOneTask(
     @Body('title') title: string,
     @Body('description') description: string,
@@ -37,6 +40,7 @@ export class TasksController {
   }
 
   @Get(':userId')
+  @UseGuards(JwtAuthenticationGuard)
   async getOneTask(@Param('userId') userId: string) {
     const response = await this.tasksService.getOneTask(userId);
     return {
@@ -45,6 +49,7 @@ export class TasksController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthenticationGuard)
   async updateTask(
     @Param('id') id: string,
     @Body('title') title: string,
@@ -55,6 +60,7 @@ export class TasksController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthenticationGuard)
   async deleteTask(@Param('id') taskId: string) {
     await this.tasksService.deleteTask(taskId);
     return {
@@ -63,6 +69,7 @@ export class TasksController {
   }
 
   @Delete()
+  @UseGuards(JwtAuthenticationGuard)
   async deleteAllTasks() {
     await this.tasksService.deleteAllTasks();
     return {

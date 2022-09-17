@@ -14,5 +14,9 @@ describe('UsersController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+    expect(controller.getAllUsers).toBeDefined();
+    expect(controller.getUserById).toBeDefined();
+    expect(controller.getUserByName).toBeDefined();
+    expect(controller.deleteUserById).toBeDefined();
   });
 });
