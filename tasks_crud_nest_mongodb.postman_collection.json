@@ -11,21 +11,9 @@
 			"item": [
 				{
 					"name": "GET ALL USERS",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"surname\": \"something else\",\r\n    \"points\": 123\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:3000/users",
 							"protocol": "http",
@@ -75,7 +63,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"raoni\",\r\n  \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Paulo\",\r\n  \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -246,7 +234,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"632510acabc8416312803c8d\",\r\n    \"name\": \"raoni\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"_id\": \"632510acabc8416312803c8d\",\r\n    \"name\": \"Paulo\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
