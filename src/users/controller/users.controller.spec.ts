@@ -1,26 +1,22 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '../service/users.service';
+import { User } from '../model/user.model';
 import { UsersController } from './users.controller';
+import { Model } from 'mongoose';
 
 describe('UsersController', () => {
-  let controller: UsersController;
+  let model: Model<User>;
+  let usersService: UsersService;
+  let usersController: UsersController;
 
-  /**
-   * This is broken. Need to be checked.
-   */
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [UsersController],
-      providers: [UsersService],
-    }).compile();
-
-    controller = module.get<UsersController>(UsersController);
+    usersService = new UsersService(model);
+    usersController = new UsersController(usersService);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
-    expect(controller.getAllUsers).toBeDefined();
-    expect(controller.getUserById).toBeDefined();
-    expect(controller.deleteUserById).toBeDefined();
+    expect(usersController).toBeDefined();
+    expect(usersController.getAllUsers).toBeDefined();
+    expect(usersController.getUserById).toBeDefined();
+    expect(usersController.deleteUserById).toBeDefined();
   });
 });

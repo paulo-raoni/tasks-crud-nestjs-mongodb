@@ -1,32 +1,31 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { UsersModule } from '../../users/users.module';
+import { Model } from 'mongoose';
+import { User } from 'src/users/model/user.model';
+import { UsersService } from '../../users/service/users.service';
+import { Task } from '../model/task.model';
 import { TasksService } from '../service/tasks.service';
 import { TasksController } from './tasks.controller';
 
 describe('TasksController', () => {
-  let controller: TasksController;
+  let userModel: Model<User>;
+  let taskModel: Model<Task>;
+  let usersService: UsersService;
+  let tasksService: TasksService;
+  let tasksController: TasksController;
 
-  /**
-   * This is broken. Need to be checked.
-   */
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [UsersModule],
-      controllers: [TasksController],
-      providers: [TasksService],
-    }).compile();
-
-    controller = module.get<TasksController>(TasksController);
+    usersService = new UsersService(userModel);
+    tasksService = new TasksService(taskModel, usersService);
+    tasksController = new TasksController(tasksService);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
-    expect(controller.createOneTask).toBeDefined();
-    expect(controller.getAllTasks).toBeDefined();
-    expect(controller.getOneTask).toBeDefined();
-    expect(controller.updateTask).toBeDefined();
-    expect(controller.deleteTask).toBeDefined();
-    expect(controller.deleteAllTasks).toBeDefined();
+    expect(tasksController).toBeDefined();
+    expect(tasksController.createOneTask).toBeDefined();
+    expect(tasksController.getAllTasks).toBeDefined();
+    expect(tasksController.getOneTask).toBeDefined();
+    expect(tasksController.updateTask).toBeDefined();
+    expect(tasksController.deleteTask).toBeDefined();
+    expect(tasksController.deleteAllTasks).toBeDefined();
   });
 
 });

@@ -1,26 +1,21 @@
-import { MongooseModule } from '@nestjs/mongoose';
-import { Test, TestingModule } from '@nestjs/testing';
-import { UsersController } from '../controller/users.controller';
-import { UserSchema } from '../model/user.model';
+import { Model } from 'mongoose';
+import { User } from '../model/user.model';
 import { UsersService } from './users.service';
 
 describe('UsersService', () => {
-  let service: UsersService;
+  let model: Model<User>;
+  let usersService: UsersService;
 
-  /**
-   * This is broken. Need to be checked.
-   */
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
-      controllers: [UsersController],
-      providers: [UsersService],
-    }).compile();
-
-    service = module.get<UsersService>(UsersService);
+    usersService = new UsersService(model);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(usersService).toBeDefined();
+    expect(usersService.create).toBeDefined();
+    expect(usersService.deleteUserById).toBeDefined();
+    expect(usersService.findAll).toBeDefined();
+    expect(usersService.findById).toBeDefined();
+    expect(usersService.findByName).toBeDefined();
   });
 });
